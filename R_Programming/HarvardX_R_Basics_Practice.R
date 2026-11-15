@@ -53,3 +53,54 @@ dim(murders)
 
 # Display column names
 names(murders)
+
+
+# ==========================================
+# SECTION 5: Data Types and Vectors Practice
+# ==========================================
+
+# Check the class of the dataset
+class(murders)
+
+# Examine the dataset structure
+str(murders)
+
+# Display the first six observations
+head(murders)
+
+# Access the population column
+murders$population
+
+# Create a population vector
+pop <- murders$population
+
+# Count entries in the vector
+length(pop)
+
+# Check vector classes
+class(pop)
+class(murders$state)
+
+# Logical vectors
+z <- 3 == 2
+z
+class(z)
+
+# Factors and factor levels
+class(murders$region)
+levels(murders$region)
+
+# Examples of basic data types
+
+# Numeric
+age <- 20
+class(age)
+
+# Character
+sample_name <- "HIV-1"
+class(sample_name)
+
+# Logical
+is_resistant <- TRUE
+class(is_resistant)
+
