@@ -104,3 +104,45 @@ class(sample_name)
 is_resistant <- TRUE
 class(is_resistant)
 
+
+# ==========================================
+# SECTION 6: Vectors and Vector Indexing
+# ==========================================
+
+# 1. Creating numeric and character vectors
+codes <- c(380, 124, 818)
+country <- c("italy", "canada", "egypt")
+
+# 2. Naming vector elements
+codes <- c(italy = 380, canada = 124, egypt = 818)
+
+# Alternative method
+codes <- c(380, 124, 818)
+country <- c("italy", "canada", "egypt")
+names(codes) <- country
+
+# 3. Accessing individual elements
+codes[2]
+
+# 4. Accessing multiple elements
+codes[c(1, 3)]
+
+# 5. Accessing a range of elements
+codes[1:2]
+
+# 6. Accessing elements by name
+codes["canada"]
+
+# 7. Checking vector information
+length(codes)
+class(codes)
+names(codes)
+
+# 8. Bioinformatics-related example
+hiv_drugs <- c("Dolutegravir", "Tenofovir", "Lamivudine")
+
+hiv_drugs[1]
+hiv_drugs[2]
+hiv_drugs[c(1, 3)]
+
+length(hiv_drugs)
