@@ -166,3 +166,44 @@ z <- as.numeric(y)
 
 # Check the result
 class(z)
+
+
+# ==========================================
+# Sorting, Ordering and Ranking in R
+# ==========================================
+
+# Create a numerical vector
+x <- c(31, 4, 15, 92, 65)
+
+# Arrange values from smallest to largest
+sort(x)
+
+# Find the positions that arrange x in ascending order
+index <- order(x)
+
+# Rearrange x using the positions
+x[index]
+
+# Find the rank of each value
+rank(x)
+
+# Load the murders dataset
+library(dslabs)
+data(murders)
+
+# Sort total murders
+sort(murders$total)
+
+# Arrange state abbreviations by total murders
+index <- order(murders$total)
+murders$abb[index]
+
+# Find the highest murder total
+max(murders$total)
+
+# Find the position of the highest murder total
+i_max <- which.max(murders$total)
+
+# Identify the state with the highest murder total
+murders$state[i_max]
+
