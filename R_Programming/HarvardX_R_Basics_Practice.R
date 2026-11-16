@@ -146,3 +146,23 @@ hiv_drugs[2]
 hiv_drugs[c(1, 3)]
 
 length(hiv_drugs)
+
+# 9. Explicit type conversion
+
+# Create a numeric vector
+x <- 1:5
+
+# Convert numeric values into characters
+y <- as.character(x)
+
+# Check the converted vector
+y
+
+# Check its data type
+class(y)
+
+# Convert character numbers back to numeric
+z <- as.numeric(y)
+
+# Check the result
+class(z)
