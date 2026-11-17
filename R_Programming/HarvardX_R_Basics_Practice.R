@@ -296,3 +296,43 @@ murders$state[index]
 
 # Count the number of qualifying states
 sum(index)
+
+
+# INDEXING AND SUBSETTING IN R
+
+library(dslabs)
+data(murders)
+
+# Calculate murder rates
+murder_rate <- murders$total / murders$population * 100000
+
+# 1. Logical indexing
+index <- murder_rate <= 1
+
+# Extract states satisfying the condition
+murders$state[index]
+
+# 2. which(): Find positions where condition is TRUE
+which(index)
+
+# 3. match(): Find positions of selected states
+selected_states <- c("New York", "Florida", "Texas")
+
+index <- match(selected_states, murders$state)
+
+# Extract matching state names and murder rates
+murders$state[index]
+murder_rate[index]
+
+# 4. %in%: Check whether values exist
+c("Boston", "Dakota", "Washington") %in% murders$state
+
+# 5. &: Combine two conditions
+west <- murders$region == "West"
+safe <- murder_rate <= 1
+
+index <- west & safe
+murders$state[index]
+
+# 6. Counting TRUE values
+sum(index)
