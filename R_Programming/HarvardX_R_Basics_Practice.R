@@ -255,5 +255,44 @@ murder_rate
 murders$state[order(murder_rate, decreasing = TRUE)]
 
 # ============================================================
-# End of Vector Arithmetic
+# End of Vector Arithmetic                                                                          
 # ============================================================
+
+# ==========================================
+# Logical Indexing and Combining Conditions
+# ==========================================
+
+# Load the murders dataset
+library(dslabs)
+data(murders)
+
+# Calculate murder rate per 100,000 people
+murder_rate <- murders$total / murders$population * 100000
+
+# Condition 1: Identify states in the West region
+west <- murders$region == "West"
+
+# Condition 2: Identify states with murder rates <= 1
+safe <- murder_rate <= 1
+
+# Combine both conditions using AND (&)
+index <- safe & west
+
+# Display states satisfying both conditions
+murders$state[index]
+
+# Count the number of states satisfying both conditions
+sum(index)
+
+# ==========================================
+# Selecting States Based on a Murder Rate
+# ==========================================
+
+# Identify states with murder rates <= 0.71
+index <- murder_rate <= 0.71
+
+# Display those states
+murders$state[index]
+
+# Count the number of qualifying states
+sum(index)
