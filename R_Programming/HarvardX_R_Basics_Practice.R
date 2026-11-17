@@ -207,3 +207,53 @@ i_max <- which.max(murders$total)
 # Identify the state with the highest murder total
 murders$state[i_max]
 
+
+# ============================================================
+# Vector Arithmetic in R
+# HarvardX Data Science: R Basics
+# ============================================================
+
+# 1. Create a vector of heights in inches
+heights <- c(65, 68, 70, 72, 67)
+
+# 2. Convert heights from inches to centimetres
+heights_cm <- heights * 2.54
+heights_cm
+
+# 3. Calculate the average height
+average_height <- mean(heights)
+average_height
+
+# 4. Calculate how much each height differs from the average
+height_difference <- heights - average_height
+height_difference
+
+# 5. Arithmetic operations between two vectors
+vector_a <- c(10, 20, 30, 40)
+vector_b <- c(2, 4, 6, 8)
+
+# Addition
+vector_a + vector_b
+
+# Subtraction
+vector_a - vector_b
+
+# Multiplication
+vector_a * vector_b
+
+# Division
+vector_a / vector_b
+
+# 6. Calculate murder rate per 100,000 people
+# The murders dataset was already loaded in the previous section.
+murder_rate <- murders$total / murders$population * 100000
+
+# Display the calculated murder rates
+murder_rate
+
+# 7. Arrange states by murder rate in decreasing order
+murders$state[order(murder_rate, decreasing = TRUE)]
+
+# ============================================================
+# End of Vector Arithmetic
+# ============================================================
