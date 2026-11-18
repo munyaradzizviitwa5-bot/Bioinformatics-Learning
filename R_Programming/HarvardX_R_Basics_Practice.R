@@ -336,3 +336,46 @@ murders$state[index]
 
 # 6. Counting TRUE values
 sum(index)
+
+
+# ==========================================
+# SECTION: BASIC DATA VISUALISATION
+# HarvardX Data Science: R Basics
+# ==========================================
+
+library(dplyr)
+library(dslabs)
+
+data("murders")
+
+# 1. Scatter plot: Population vs total murders
+# Convert population into millions
+x <- murders$population / 10^6
+y <- murders$total
+
+plot(x, y,
+     main = "Total Murders vs Population",
+     xlab = "Population (millions)",
+     ylab = "Total Murders")
+
+# 2. Histogram: Distribution of murder rates
+# Calculate murders per 100,000 people
+murders <- mutate(
+  murders,
+  rate = total / population * 100000
+)
+
+hist(murders$rate,
+     main = "Distribution of Murder Rates",
+     xlab = "Murders per 100,000 people")
+
+# 3. Box plot: Murder rates by region
+boxplot(rate ~ region,
+        data = murders,
+        main = "Murder Rates by Region",
+        xlab = "Region",
+        ylab = "Murders per 100,000 people")
+
+# ==========================================
+# END OF BASIC DATA VISUALISATION
+# ==========================================
