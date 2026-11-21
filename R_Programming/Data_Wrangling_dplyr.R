@@ -118,3 +118,81 @@ us_murder_rate <- murders %>%
 us_murder_rate
 
 
+# =========================================================
+# Summarizing Data Using dplyr
+# HarvardX Data Science: R Basics
+# =========================================================
+
+# 1. Load required packages
+
+library(tidyverse)
+library(dplyr)
+library(dslabs)
+
+# 2. Load the murders dataset
+
+data("murders")
+
+# 3. Calculate the murder rate per 100,000 people
+
+murders <- mutate(
+  murders,
+  rate = total / population * 10^5
+)
+
+# 4. Calculate minimum, median, and maximum murder rates
+#    for states in the Western region using quantile()
+#    This returns the three values as a vector.
+
+murders %>%
+  filter(region == "West") %>%
+  summarize(range = quantile(rate, c(0, 0.5, 1)))
+
+# 5. Create a custom function that returns
+#    minimum, median, and maximum as a data frame
+
+my_quantile <- function(x) {
+  
+  # Calculate the minimum, median, and maximum
+  r <- quantile(x, c(0, 0.5, 1))
+  
+  # Return the results as separate columns
+  data.frame(
+    minimum = r[1],
+    median = r[2],
+    maximum = r[3]
+  )
+}
+
+# 6. Apply the custom function using summarize()
+#    for states in the Western region
+
+murders %>%
+  filter(region == "West") %>%
+  summarize(my_quantile(rate))
+
+# 7. Access individual columns from the summarized data frame
+
+s <- murders %>%
+  filter(region == "West") %>%
+  summarize(my_quantile(rate))
+
+s$minimum
+s$median
+s$maximum
+
+# 8. Calculate the unadjusted average murder rate
+#    This is the ordinary mean of the state-level rates.
+
+mean(murders$rate)
+
+# 9. Calculate the population-adjusted murder rate
+#    This calculates the total murders divided by
+#    the total population, multiplied by 100,000.
+
+us_murder_rate <- murders %>%
+  summarize(
+    rate = sum(total) / sum(population) * 10^5
+  )
+
+us_murder_rate
