@@ -66,3 +66,55 @@ str(grades)
 
 # Check the data type of the names column
 class(grades$names)
+
+
+# ==========================================
+# Summarizing Data Using dplyr
+# HarvardX Data Science: R Basics
+# ==========================================
+
+# 1. Load packages
+library(tidyverse)
+library(dplyr)
+library(dslabs)
+
+# 2. Load the murders dataset
+data("murders")
+
+# 3. Calculate the murder rate per 100,000 people
+murders <- mutate(
+  murders,
+  rate = total / population * 10^5
+)
+
+# 4. Calculate minimum, median and maximum
+# murder rates for states in the West region
+
+s <- murders %>%
+  filter(region == "West") %>%
+  summarize(
+    minimum = min(rate),
+    median = median(rate),
+    maximum = max(rate)
+  )
+
+# 5. Display the summary table
+s
+
+# 6. Access individual summary values
+s$median
+s$maximum
+
+# 7. Calculate the unweighted average murder rate
+mean(murders$rate)
+
+# 8. Calculate the population-weighted national murder rate
+us_murder_rate <- murders %>%
+  summarize(
+    rate = sum(total) / sum(population) * 10^5
+  )
+
+# 9. Display the national murder rate
+us_murder_rate
+
+
