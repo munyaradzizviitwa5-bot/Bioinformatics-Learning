@@ -42,3 +42,27 @@ final_table <- murders %>%
 
 head(final_table)
 dim(final_table)
+
+# ==========================================
+# Creating Data Frames in R
+# HarvardX Data Science: R Basics
+# ==========================================
+
+# Create a data frame containing student names
+# and examination scores
+
+grades <- data.frame(
+  names = c("John", "Juan", "Jean", "Yao"),
+  exam_1 = c(85, 80, 90, 85),
+  exam_2 = c(90, 85, 95, 90),
+  stringsAsFactors = FALSE
+)
+
+# Display the data frame
+print(grades)
+
+# Check the structure of the data frame
+str(grades)
+
+# Check the data type of the names column
+class(grades$names)
