@@ -196,3 +196,61 @@ us_murder_rate <- murders %>%
   )
 
 us_murder_rate
+
+# ============================================================
+# 11. Using pull() to Extract Numeric Values
+# HarvardX Data Science: R Basics
+# ============================================================
+
+# 1. Load required packages
+library(tidyverse)
+library(dplyr)
+library(dslabs)
+
+# 2. Load the murders dataset
+data(murders)
+
+# 3. Calculate the murder rate for each state
+murders <- mutate(
+  murders,
+  rate = total / population * 10^5
+)
+
+# Calculate the population-adjusted average murder rate.
+# This divides total murders by total population
+# and multiplies the result by 100,000.
+
+us_murder_rate <- murders %>%
+  summarize(
+    rate = sum(total) / sum(population) * 10^5
+  )
+
+# Display the result
+us_murder_rate
+
+# Check the object class.
+# summarize() returns a data frame (tibble).
+
+class(us_murder_rate)
+
+# Extract the rate column as a numeric vector.
+# pull() removes the data-frame structure.
+
+us_murder_rate %>%
+  pull(rate)
+
+# Save the extracted numeric value directly.
+us_murder_rate <- murders %>%
+  summarize(
+    rate = sum(total) / sum(population) * 10^5
+  ) %>%
+  pull(rate)
+
+# Display the numeric result
+us_murder_rate
+
+# Check the new object class.
+class(us_murder_rate)
+
+
+)
