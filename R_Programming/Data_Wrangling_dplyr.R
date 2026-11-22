@@ -287,4 +287,14 @@ us_murder_rate
 
 # Check the object's class.
 class(us_murder_rate)
-)
+
+# Group by region
+murders %>% 
+  group_by(region)
+
+# Summarize after grouping
+murders %>%
+  group_by(region) %>%
+  summarize(median = median(rate))
+
+
