@@ -252,5 +252,39 @@ us_murder_rate
 # Check the new object class.
 class(us_murder_rate)
 
+# ============================================================
+# 12. The Dot Placeholder (.)
+# HarvardX Data Science: R Basics
+# ============================================================
 
+# The dot (.) acts as a placeholder for data
+# being passed through a pipe.
+library(tidyverse)
+library(dplyr)
+library(dslabs)
+data(murders)
+murders <- mutate(murders, rate = total / population * 10^5)
+
+# Calculate the population-adjusted average murder rate.
+
+us_murder_rate <- murders %>%
+  summarize(
+    rate = sum(total) / sum(population) * 10^5
+  )
+
+# Display the result as a data frame.
+us_murder_rate
+
+# Use the dot placeholder to access the rate column.
+us_murder_rate <- murders %>%
+  summarize(
+    rate = sum(total) / sum(population) * 10^5
+  ) %>%
+  .$rate
+
+# Display the extracted numeric value.
+us_murder_rate
+
+# Check the object's class.
+class(us_murder_rate)
 )
