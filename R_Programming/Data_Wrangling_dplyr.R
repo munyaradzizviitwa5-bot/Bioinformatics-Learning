@@ -297,4 +297,41 @@ murders %>%
   group_by(region) %>%
   summarize(median = median(rate))
 
+# ==========================================
+#  Sorting Data Tables with dplyr
+# ==========================================
+
+# Order states by population size (ascending)
+murders %>%
+  arrange(population) %>%
+  head()
+
+# Order states by murder rate (ascending)
+murders %>%
+  arrange(rate) %>%
+  head()
+
+# Order states by murder rate (descending)
+murders %>%
+  arrange(desc(rate)) %>%
+  head()
+
+# Order states by region, then murder rate within each region
+murders %>%
+  arrange(region, rate) %>%
+  head()
+
+# Select the top 10 states by murder rate
+murders %>%
+  top_n(10, rate)
+
+# Select the top 10 states by murder rate
+# and display them in descending order
+murders %>%
+  arrange(desc(rate)) %>%
+  top_n(10)
+
+# Select the 10 states with the highest murder rates
+murders %>%
+  slice_max(order_by = rate, n = 10)
 
