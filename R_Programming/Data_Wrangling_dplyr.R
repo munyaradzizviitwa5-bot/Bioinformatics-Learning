@@ -335,3 +335,94 @@ murders %>%
 murders %>%
   slice_max(order_by = rate, n = 10)
 
+
+# ============================================================
+# DATA MANIPULATION USING data.table
+# HarvardX Data Science: R Basics
+# Dataset: murders (dslabs package)
+# ============================================================
+
+# 1. Install and load packages
+# Installation is needed only once.
+# install.packages("data.table")
+
+library(data.table)
+library(dplyr)
+library(dslabs)
+
+# Load dataset
+data(murders)
+
+# 2. Convert data frame into a data.table
+murders_dt <- setDT(copy(murders))
+
+# Display first six rows
+head(murders_dt)
+
+# 3. Selecting columns using dplyr
+select(murders, state, region)
+
+# 4. Selecting columns using data.table
+
+# Method 1
+murders_dt[, c("state", "region"), with = FALSE] |> head()
+
+# Method 2
+murders_dt[, .(state, region)] |> head()
+
+# 5. Adding a column using dplyr
+murders_dplyr <- mutate(
+  murders,
+  rate = total / population * 100000
+)
+
+head(murders_dplyr)
+
+# 6. Adding a column using data.table
+murders_dt[, rate := total / population * 100000]
+
+head(murders_dt)
+
+# 7. Adding multiple columns using data.table
+murders_dt[, `:=`(
+  rate = total / population * 100000,
+  population_millions = population / 1000000
+)]
+
+head(murders_dt)
+
+# 8. Understanding update by reference
+
+x <- data.table(a = 1)
+y <- x
+
+# Modify x by reference
+x[, a := 2]
+
+print(x)
+print(y)
+
+# Both show the updated value because they refer
+# to the same underlying data.table.
+
+# 9. Creating an independent copy using copy()
+
+x <- data.table(a = 1)
+y <- copy(x)
+
+# Modify x
+x[, a := 2]
+
+print(x)
+print(y)
+
+# x is now 2, while y remains 1.
+
+# 10. Summary
+# data.table provides efficient data manipulation.
+# := adds or updates columns by reference.
+# copy() creates an independent copy of a data.table.
+# dplyr::mutate() creates a modified data frame result.
+
+
+
