@@ -459,3 +459,68 @@ murders %>%
   select(state, rate)
 
 
+# ==========================================
+# SUMMARIZING DATA WITH DPLYR AND DATA.TABLE
+# ==========================================
+
+# Load packages and prepare the heights dataset
+library(tidyverse)
+library(dplyr)
+library(dslabs)
+library(data.table)
+
+data(heights)
+heights <- setDT(heights)
+
+# 1. Summarizing with dplyr
+s <- heights %>%
+  summarize(
+    average = mean(height),
+    standard_deviation = sd(height)
+  )
+
+# 2. Summarizing with data.table
+s <- heights[, .(
+  average = mean(height),
+  standard_deviation = sd(height)
+)]
+
+# 3. Subsetting and summarizing in dplyr
+s <- heights %>%
+  filter(sex == "Female") %>%
+  summarize(
+    average = mean(height),
+    standard_deviation = sd(height)
+  )
+
+# 4. Subsetting and summarizing in data.table
+s <- heights[
+  sex == "Female",
+  .(
+    average = mean(height),
+    standard_deviation = sd(height)
+  )
+]
+
+# 5. Define a custom summary function
+median_min_max <- function(x) {
+  qs <- quantile(x, c(0.5, 0, 1))
+  
+  data.frame(
+    median = qs[1],
+    minimum = qs[2],
+    maximum = qs[3]
+  )
+}
+
+# 6. Calculate multiple summaries
+heights[, .(median_min_max(height))]
+
+# 7. Grouping and summarizing with data.table
+heights[, .(
+  average = mean(height),
+  standard_deviation = sd(height)
+), by = sex]
+
+
+
