@@ -545,5 +545,46 @@ murders[order(population, decreasing = TRUE)] |> head()
 # Order states by region and then by murder rate
 murders[order(region, rate)] |> head()
 
+# HarvardX: Data Science - R Basics
+# Topic: Tibbles and Grouped Data
+# Purpose: Practising tibble creation, conversion,
+# object classes, column extraction and grouping.
+
+library(tidyverse)
+library(dplyr)
+library(dslabs)
+
+data(murders)
+data(gapminder)
+
+# Group data by region
+murders %>%
+  group_by(region)
+
+# Check the class of grouped data
+murders %>%
+  group_by(region) %>%
+  class()
+
+# Convert a data frame into a tibble
+as_tibble(gapminder)
+
+# Compare column classes
+class(murders[, 1])
+class(as_tibble(murders)[, 1])
+
+# Extract a column using $
+class(as_tibble(murders)$state)
+
+# Access a column that does not exist
+murders$State
+as_tibble(murders)$State
+
+# Create a tibble
+tibble(
+  id = c(1, 2, 3),
+  func = c(mean, median, sd)
+)
+
 
 
