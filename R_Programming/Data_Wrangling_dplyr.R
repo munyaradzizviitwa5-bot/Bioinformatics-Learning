@@ -522,5 +522,28 @@ heights[, .(
   standard_deviation = sd(height)
 ), by = sex]
 
+# Load packages and prepare the data
+library(tidyverse)
+library(dplyr)
+library(data.table)
+library(dslabs)
+
+data(murders)
+
+# Convert data frame into a data.table
+murders <- setDT(murders)
+
+# Calculate murder rate per 100,000 population
+murders[, rate := total / population * 100000]
+
+# Order states by population (ascending)
+murders[order(population)] |> head()
+
+# Order states by population (descending)
+murders[order(population, decreasing = TRUE)] |> head()
+
+# Order states by region and then by murder rate
+murders[order(region, rate)] |> head()
+
 
 
