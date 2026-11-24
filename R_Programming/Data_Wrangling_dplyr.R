@@ -424,5 +424,38 @@ print(y)
 # copy() creates an independent copy of a data.table.
 # dplyr::mutate() creates a modified data frame result.
 
+# Load packages and prepare the data
+library(tidyverse)
+library(dplyr)
+library(dslabs)
+library(data.table)
+
+data(murders)
+
+# Convert data frame to data.table
+murders <- setDT(murders)
+
+# Calculate murder rate using dplyr
+murders <- mutate(
+  murders,
+  rate = total / population * 10^5
+)
+
+# Calculate murder rate using data.table
+murders[, rate := total / population * 10^5]
+
+# Subsetting in dplyr
+filter(murders, rate <= 0.7)
+
+# Subsetting in data.table
+murders[rate <= 0.7]
+
+# Combine filtering and column selection in data.table
+murders[rate <= 0.7, .(state, rate)]
+
+# Combine filtering and column selection in dplyr
+murders %>%
+  filter(rate <= 0.7) %>%
+  select(state, rate)
 
 
