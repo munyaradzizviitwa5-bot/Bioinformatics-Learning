@@ -379,3 +379,52 @@ boxplot(rate ~ region,
 # ==========================================
 # END OF BASIC DATA VISUALISATION
 # ==========================================
+
+
+# ==========================================
+# USER-DEFINED FUNCTIONS
+# ==========================================
+
+# 1. Function to calculate the arithmetic mean
+
+avg <- function(x) {
+  s <- sum(x)
+  n <- length(x)
+  s / n
+}
+
+# 2. Compare our function with R's built-in mean()
+
+x <- 1:100
+
+identical(mean(x), avg(x))
+
+# 3. Understanding local variables
+
+s <- 3
+
+avg(1:10)
+
+# The variable s inside avg() is local.
+# It does not change the global variable s.
+
+s
+
+# 4. Function with multiple arguments and a default value
+
+my_average <- function(x, arithmetic = TRUE) {
+  n <- length(x)
+  
+  if (arithmetic) {
+    sum(x) / n
+  } else {
+    prod(x)^(1/n)
+  }
+}
+
+# Test arithmetic mean
+my_average(c(2, 4, 8))
+
+# Test geometric mean
+my_average(c(2, 4, 8), arithmetic = FALSE)
+
